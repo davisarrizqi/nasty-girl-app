@@ -13,7 +13,7 @@ class NastyGirl extends StatelessWidget {
     return MaterialApp(
       title: 'Aplikasi Portal',
       theme: ThemeData.dark(),
-      home: const Home(),
+      home: const BottomNavbar(),
     );
   }
 }
@@ -522,7 +522,7 @@ class _HomeState extends State<Home> {
                                     fontSize: 12,
                                   ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -533,10 +533,159 @@ class _HomeState extends State<Home> {
               ),
 
               // closer spacer
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
             ],
           ),
         ),
+    );
+  }
+}
+
+// Schedule Page - Jadwal
+class Schedule extends StatefulWidget {
+  const Schedule({super.key});
+  @override
+  State<Schedule> createState() => _ScheduleState();
+}
+
+class _ScheduleState extends State<Schedule> {
+  @override
+  Widget build(BuildContext context){
+    return const Scaffold(
+      body: Center(
+        child: Text(
+          'Halaman Jadwal'
+        ),
+      ),
+    );
+  }
+}
+
+
+// Presence Page - Presensi
+class Presence extends StatefulWidget {
+  const Presence({super.key});
+  @override
+  State<Presence> createState() => _PresenceState();
+}
+
+class _PresenceState extends State<Presence> {
+  @override
+  Widget build(BuildContext context){
+    return const Scaffold(
+      body: Center(
+        child: Text(
+          'Halaman Presensi'
+        ),
+      ),
+    );
+  }
+}
+
+
+// Info Page
+class Info extends StatefulWidget {
+  const Info({super.key});
+  @override
+  State<Info> createState() => _InfoState();
+}
+
+class _InfoState extends State<Info> {
+  @override
+  Widget build(BuildContext context){
+    return const Scaffold(
+      body: Center(
+        child: Text(
+          'Halaman Info'
+        ),
+      ),
+    );
+  }
+}
+
+
+// Account Page - Akun
+class Account extends StatefulWidget {
+  const Account({super.key});
+  @override
+  State<Account> createState() => _AccountState();
+}
+
+class _AccountState extends State<Account> {
+  @override
+  Widget build(BuildContext context){
+    return const Scaffold(
+      body: Center(
+        child: Text(
+          'Halaman Akun'
+        ),
+      ),
+    );
+  }
+}
+
+class BottomNavbar extends StatefulWidget {
+  const BottomNavbar({super.key});
+
+  @override
+  State<BottomNavbar> createState() => _BottomNavbarState();
+}
+
+class _BottomNavbarState extends State<BottomNavbar> {
+  int currentPageIndex = 0;
+
+  @override
+  Widget build(BuildContext navbarContext) {
+    return Scaffold(
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: (int index) {
+          setState(() {
+            currentPageIndex = index;
+          });
+        },
+
+        indicatorColor: Colors.grey[600],
+        selectedIndex: currentPageIndex,
+        destinations: const <Widget>[
+          NavigationDestination(
+            selectedIcon: Icon(Icons.home),
+            icon: Icon(Icons.home_outlined),
+            label: 'Beranda',
+          ),
+
+          NavigationDestination(
+            selectedIcon: Icon(Icons.date_range),
+            icon: Icon(Icons.date_range_outlined),
+            label: 'Jadwal',
+          ),
+
+          NavigationDestination(
+            selectedIcon: Icon(Icons.camera),
+            icon: Icon(Icons.camera_alt_outlined),
+            label: 'Presensi',
+          ),
+
+          NavigationDestination(
+            selectedIcon: Icon(Icons.notifications),
+            icon: Icon(Icons.notifications_outlined),
+            label: 'Info',
+          ),
+
+          NavigationDestination(
+            selectedIcon: Icon(Icons.account_circle),
+            icon: Icon(Icons.account_circle_outlined),
+            label: 'Akun',
+          ),
+        ],
+      ),
+
+      body: <Widget>[
+        const Home(),
+        const Schedule(),
+        const Presence(),
+        const Info(),
+        const Account(),
+      ][currentPageIndex],
     );
   }
 }
